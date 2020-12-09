@@ -1,20 +1,11 @@
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import Constants from 'expo-constants';
 /* types */
 import { Shop } from '../types/shop';
 
 if (!firebase.apps.length) {
-  const firebaseConfig = {
-    apiKey: 'AIzaSyAQ7Y1MWsCfELjTt-2ItkvKCrFs5PRj65w',
-    authDomain: 'shop-review-app-5da37.firebaseapp.com',
-    projectId: 'shop-review-app-5da37',
-    storageBucket: 'shop-review-app-5da37.appspot.com',
-    messagingSenderId: '17232650988',
-    appId: '1:17232650988:web:09fa3e4ce455b77aecbbc9',
-    measurementId: 'G-VWH14BV67R',
-  };
-
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(Constants.manifest.extra.firebase);
 }
 
 // Firebase Storeからストア情報を取得する
