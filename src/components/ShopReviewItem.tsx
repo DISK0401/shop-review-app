@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
+/* component */
+import { Stars } from './Stars';
 /* types */
 import { Shop } from '../types/shop';
 
@@ -41,6 +43,7 @@ export const ShopReviewItem: React.FC<Props> = ({ shop }: Props) => {
       <Image source={{ uri: imageUrl }} style={styles.image} />
       <Text style={styles.nameText}>{name}</Text>
       <Text style={styles.placeText}>{place}</Text>
+      <Stars score={score} />
     </View>
   );
 };
