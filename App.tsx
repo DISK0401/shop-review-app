@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 /* lib */
 import { getShops } from './src/lib/firebase';
 /* components */
@@ -25,7 +25,18 @@ export default function App() {
   const shopItems = shops.map((shop, index) => (
     <ShopReviewItem shop={shop} key={index.toString()} />
   ));
-  return <View style={styles.container}>{shopItems}</View>;
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={shops}
+        renderItem={({ item }: { item: Shop }) => (
+          <ShopReviewItem shop={item} />
+        )}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
