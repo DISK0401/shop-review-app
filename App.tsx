@@ -1,27 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
 import { StyleSheet, Text, View } from 'react-native';
-
-if (!firebase.apps.length) {
-  const firebaseConfig = {
-    apiKey: 'AIzaSyAQ7Y1MWsCfELjTt-2ItkvKCrFs5PRj65w',
-    authDomain: 'shop-review-app-5da37.firebaseapp.com',
-    projectId: 'shop-review-app-5da37',
-    storageBucket: 'shop-review-app-5da37.appspot.com',
-    messagingSenderId: '17232650988',
-    appId: '1:17232650988:web:09fa3e4ce455b77aecbbc9',
-    measurementId: 'G-VWH14BV67R',
-  };
-
-  firebase.initializeApp(firebaseConfig);
-}
-
-type Shop = {
-  name: string;
-  place: string;
-};
+/* lib */
+import { getShops } from './src/lib/firebase';
+/* types */
+import { Shop } from './src/types/shop';
 
 export default function App() {
   // shopデータ用のステート
@@ -34,8 +16,7 @@ export default function App() {
 
   // Firebase Storeからストア情報を取得する
   const getFirebaseItems = async () => {
-    const snapshot = await firebase.firestore().collection('shops').get();
-    const shops = snapshot.docs.map((doc) => doc.data() as Shop);
+    const shops = await getShops();
     setShops(shops);
   };
 
